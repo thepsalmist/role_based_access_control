@@ -2,6 +2,8 @@ from rest_framework import serializers
 from .models import CustomUser
 from django.contrib import auth
 from rest_framework.exceptions import AuthenticationFailed
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.authtoken.serializers import AuthTokenSerializer
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):
@@ -43,9 +45,11 @@ class UserLoginSerializer(serializers.ModelSerializer):
         email = attrs.get("email")
         password = attrs.get("pasword")
 
-        user = auth.authenticate(email=email, password=password)
+        if email and password:
+            user = auth.authenticate(email=email, password=password)
 
-        if not user:
-            raise serializers.AuthenticationFailed("The user does not exist")
+        if user is not None:
+
+            raise AuthenticationFailed("The user does not exist")
 
         return {"email": user.email}

@@ -17,11 +17,11 @@ class Chart(models.Model):
     author = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE, related_name="charts"
     )
-    department = models.CharField(choices=DEPARTMENTS, max_length=10)
+    department = models.CharField(choices=DEPARTMENTS, max_length=20)
     published = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = "-published"
+        ordering = ("-published",)
 
     def __str__(self):
         return self.name

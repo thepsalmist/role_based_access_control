@@ -40,7 +40,6 @@ class UserManager(BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    user_groups = models.ForeignKey(Group, on_delete=models.CASCADE)
     email = models.EmailField(max_length=255, unique=True, db_index=True)
     is_verified = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
@@ -48,7 +47,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     created_at = models.DateTimeField(auto_now_add=True)
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["user_groups_id"]
+    REQUIRED_FIELDS = []
 
     objects = UserManager()
 

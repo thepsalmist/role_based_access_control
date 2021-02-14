@@ -1,7 +1,8 @@
 from django.urls import path
+from .views import ChartsListView
 
 app_name = "charts"
 
 urlpatterns = [
-    path("charts/", ChartListView.as_view(), name="charts"),
+    path("", ChartsListView.as_view(), name="charts"),
 ]
