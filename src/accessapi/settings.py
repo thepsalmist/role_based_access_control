@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "drf_yasg",
     # custom apps
     "authentication.apps.AuthenticationConfig",
+    "chart.apps.ChartsConfig",
 ]
 
 MIDDLEWARE = [
