@@ -5,6 +5,10 @@ from rest_framework.response import Response
 
 # Create your views here.
 class UserRegisterView(generics.GenericAPIView):
+    """
+    Registers user
+    """
+
     serializer_class = RegisterSerializer
 
     def post(self, request):

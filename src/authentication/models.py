@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser,
     BaseUserManager,
+    Group,
     PermissionsMixin,
 )
 
@@ -20,7 +21,7 @@ class UserManager(BaseUserManager):
         if email is None:
             raise TypeError("The email cannot be empty")
 
-        user = self.models(email=self.normalize_email(email))
+        user = self.model(email=self.normalize_email(email))
         user.set_password(password)
         user.save()
         return user
@@ -39,6 +40,7 @@ class UserManager(BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
+    user_groups = models.ForeignKey(Group, on_delete=models.CASCADE)
     email = models.EmailField(max_length=255, unique=True, db_index=True)
     is_verified = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
@@ -46,7 +48,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     created_at = models.DateTimeField(auto_now_add=True)
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ["user_groups_id"]
 
     objects = UserManager()
 

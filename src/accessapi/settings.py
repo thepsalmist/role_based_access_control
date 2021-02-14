@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # installed apps
     "rest_framework",
+    "drf_yasg",
     # custom apps
     "authentication.apps.AuthenticationConfig",
 ]

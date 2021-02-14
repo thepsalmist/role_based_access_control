@@ -15,7 +15,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         """
         email = attrs.get("email")
 
-        if email is not None:
+        if email is None:
             raise serializers.ValidationError("The email is required")
         return attrs
 
